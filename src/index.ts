@@ -11,7 +11,9 @@ const secretManagerClient = new SecretManagerServiceClient();
 export class SecretHelper {
   private value?: string | Uint8Array | null | undefined;
 
-  constructor(private readonly config: SecretHelperConfig) {}
+  constructor(private readonly config: SecretHelperConfig) {
+    this.getSecret();
+  }
 
   async getSecret() {
     if (!this.value) {
