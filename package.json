@@ -1,0 +1,28 @@
+{
+  "name": "@carrotrevolution/secret-manager",
+  "version": "1.0.0",
+  "description": "Secret Manager Helper",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "files": [
+    "build/src"
+  ],
+  "repository": {},
+  "license": "Apache-2.0",
+  "keywords": [],
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix"
+  },
+  "devDependencies": {
+    "gts": "^3.1.0",
+    "typescript": "^4.0.3",
+    "@types/node": "^14.11.2"
+  },
+  "dependencies": {
+    "@google-cloud/secret-manager": "^3.10.1"
+  }
+}
