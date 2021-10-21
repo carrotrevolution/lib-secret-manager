@@ -33,6 +33,6 @@ export class SecretHelper {
     if (!secret) {
       throw new Error(`No value found for secret ${name}.`);
     }
-    return secret;
+    return secret.toString();
   }
 }
