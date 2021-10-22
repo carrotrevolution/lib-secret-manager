@@ -10,9 +10,11 @@ const secretManagerClient = new SecretManagerServiceClient();
 
 export class SecretHelper {
   private value?: string | Uint8Array | null | undefined;
+  readonly secretVersionName: string;
 
-  constructor(private readonly config: SecretHelperConfig) {
-    this.getSecret();
+  constructor(config: SecretHelperConfig) {
+    const {projectId, secretName, secretVersion} = config;
+    this.secretVersionName = `projects/${projectId}/secrets/${secretName}/versions/${secretVersion}`;
   }
 
   async getSecret() {
@@ -23,15 +25,12 @@ export class SecretHelper {
   }
 
   private async fetchSecret() {
-    const {projectId, secretName, secretVersion} = this.config;
-
-    const name = `projects/${projectId}/secrets/${secretName}/versions/${secretVersion}`;
     const [version] = await secretManagerClient.accessSecretVersion({
-      name,
+      name: this.secretVersionName,
     });
     const secret = version.payload?.data;
     if (!secret) {
-      throw new Error(`No value found for secret ${name}.`);
+      throw new Error(`No value found for secret ${this.secretVersionName}.`);
     }
     return secret.toString();
   }
